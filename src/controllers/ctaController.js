@@ -17,7 +17,6 @@ export default class CtaController {
         message: "cta uploaded successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }
@@ -101,7 +100,6 @@ export default class CtaController {
         message: "CTA is Updated successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }

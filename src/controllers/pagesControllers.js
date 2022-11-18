@@ -19,7 +19,6 @@ export default class PagesController {
         message: "Pages created Successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(401).json({
         success: false,
         message: "Pages not successful created",
@@ -88,7 +87,6 @@ export default class PagesController {
         message: "Page is Updated successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }

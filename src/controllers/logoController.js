@@ -77,7 +77,6 @@ export default class LogoController {
         });
       });
     } catch (error) {
-      console.log(error);
       res.status(400).json({
         success: false,
         message: "An error occurred",
@@ -101,7 +100,6 @@ export default class LogoController {
         message: "Logo is Updated successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }

@@ -18,7 +18,6 @@ export default class ServiceController {
         message: "service uploaded successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }
@@ -91,7 +90,6 @@ export default class ServiceController {
   async serviceLimitList(req, res) {
     try {
       let limit = await ContentLimits.findAll({ where: { section_name: 'diseases' } })
-      console.log(limit);
       if (limit && limit.length > 0) {
         await Services.findAll({limit: limit[0].content_limit}).then((response) => {
           response.forEach(element => {
@@ -115,7 +113,6 @@ export default class ServiceController {
         await Services.findAll({limit: 4}).then((response) => {
           response.forEach(element => {
             if (element.image != null) {
-              console.log(process.env.IMAGEPATH);
               if (element.image.split('uploads/')[0]) {
                 element.image = element.image
               } else {
@@ -154,7 +151,6 @@ export default class ServiceController {
         message: "service is Updated successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }

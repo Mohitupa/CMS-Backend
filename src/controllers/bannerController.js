@@ -12,13 +12,11 @@ export default class BannerController {
       let banner = req.body;
       banner['banner'] = req.file.path;
       const bannerCreate = await Banners.create(banner);
-      console.log("banner");
       res.status(200).json({
         success: true,
         message: "Banner uploaded successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }

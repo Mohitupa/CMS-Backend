@@ -18,7 +18,6 @@ export default class ContactController {
     };
     let mailSent = await sendEmail(mailOption);
     if (mailSent != "error") {
-      console.log(req.body);
       await Contacts.create(req.body).then((response) => {
         res.status(200).json({
           success: true,

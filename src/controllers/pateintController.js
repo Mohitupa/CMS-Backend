@@ -25,7 +25,6 @@ export default class PateintController {
         patient_id: alreadyVisited[0].id,
         visit_date: req.body.visit_date,
       };
-      console.log(visitedpatient);
       await PateintVisit.create(visitedpatient)
         .then((response) => {
           res.status(200).json({
@@ -226,7 +225,6 @@ export default class PateintController {
                                 });
                             })
                             .catch((err) => {
-                              console.log(err);
                               if (sheetrows.length == index + 1) {
                                 res.status(400).send({ message: err.message });
                               }
@@ -246,19 +244,19 @@ export default class PateintController {
   async pateintDteailsById(req, res) {
     try {
       let pateintData;
-      pateintData = await Pateints.findAll({ where: { id: req.params.id } })
-      for (let i = 0; i < pateintData.length; i++) {
-        await PateintVisit.findAll({ where: { patient_id: req.params.id } }).then((results) => {
-          if (results.length > 0) {
-            console.log(results[0].dataValues.visit_date);
-            pateintData[i].dataValues["visit_date"] = results[0].dataValues.visit_date;
-          }
-          res.status(200).json({
-            success: true,
-            data: pateintData,
-          });
-        });
+      let arr = [];
+      pateintData = await Pateints.findAll({
+        include: ["patient_visits"], where: { id: req.params.id }
+      })
+      let visit = pateintData[0].dataValues.patient_visits;
+      for (let i = 0; i < visit.length; i++) {
+        arr.push(visit[i].dataValues.visit_date)
+        pateintData[0].dataValues["visit_date"] = arr;
       }
+      res.status(200).json({
+        success: true,
+        data: pateintData,
+      });
     } catch (error) {
       res.status(400).json({
         success: false,
@@ -316,7 +314,6 @@ export default class PateintController {
         })
       }
     } catch (error) {
-      console.log(error);
       res.status(400).json({
         success: false,
         message: "An error occurred",

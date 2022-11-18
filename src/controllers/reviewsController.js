@@ -17,7 +17,6 @@ export default class ReviewController {
       //   console.dir(result, { depth: null });
       if (result) {
         try {
-          console.log(result);
           for (let i = 0; i < result.length; i++) {
             let review = {
               user_name: result[i].user.name,
@@ -38,7 +37,6 @@ export default class ReviewController {
           });
 
         } catch (err) {
-          console.log(err);
           res.status(401).json({
             success: false,
             message: "review not Added Successfully",

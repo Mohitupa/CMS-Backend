@@ -1,4 +1,5 @@
 import Sequelize from "sequelize";
+import PateintVisit from "./pateintVisited";
 import sequelize from "./../core/sequelize";
 
 const patients = sequelize.define("patients",{
@@ -50,6 +51,13 @@ const patients = sequelize.define("patients",{
     },
 },{
     timestamps: false
+});
+
+
+patients.hasMany(PateintVisit, { as: "patient_visits" });
+PateintVisit.belongsTo(patients, {
+  foreignKey: "patientId",
+  as: "Patient_id",
 });
 
 export default patients;

@@ -18,17 +18,15 @@ export default class InfoController {
         message: "info uploaded successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }
 
 
   async infoList(req, res) {
+
     try {
       await Infos.findAll().then((response) => {
-        console.log(response);
-        console.log('infoList"--------------------------------------------------------------------------"');
         response.forEach(element => {
           if (element.image != null) {
 
@@ -104,7 +102,6 @@ export default class InfoController {
         message: "info is Updated successfully",
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send({ message: err.message, success: false });
     }
   }
@@ -173,6 +170,4 @@ export default class InfoController {
       });
     }
   }
-
-
 }
