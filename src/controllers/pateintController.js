@@ -245,6 +245,14 @@ export default class PateintController {
     try {
       let pateintData;
       let arr = [];
+      // pateintData = await Pateints.findAll({
+      //   include: [ {
+      //     model: PateintVisit,
+      //     as: 'patient_visits',
+      //     attributes: ['visit_date']       
+      //   }
+      //   ], where: { id: req.params.id }
+      // })
       pateintData = await Pateints.findAll({
         include: ["patient_visits"], where: { id: req.params.id }
       })
